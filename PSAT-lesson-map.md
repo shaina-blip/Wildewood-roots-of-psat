@@ -33,11 +33,17 @@ primer that leads into the full SAT binder later in junior year.
   - Adaptive / digital testing
   - How much can I improve?
   - The Winning Formula
-- **1B — Math Tools & Desmos** *(dropped "Skip the Bullets")*:
-  - Where to start?
-  - Math Stacking
-  - **Desmos deep-dive I — *when* to reach for it**
-  - **Desmos deep-dive II — *how*** (graphing, tables, sliders, solving)
+- **1B — Math Tools & Desmos** *(dropped "Skip the Bullets"; Desmos = hands-on
+  skill drills, no YES/No/Maybe theory)* — 7 parts:
+  1. Where to start?
+  2. Math Stacking
+  3. **Meet Your Math Tools** — intro to Desmos + the Reference Sheet (formula
+     sheet image embedded; full walkthrough deferred to Geometry)
+  4. Desmos: Know the Buttons
+  5. **Desmos: Plug In & Solve** — PSAT T2 M1 Q7 (`8x−7x+130=260`)
+  6. **Desmos: The Table Function** — PSAT T2 M2 Q10 (`g(x)=11+4x`, which table)
+  7. **Desmos: mean() & median()** — two custom SAT-format items (list→median;
+     word problem comparing two medians)
 
 ### Lesson 2
 - **2A — Reading & Punctuation:** Reading With Your Full Brain · Periods/Semicolons ·
@@ -51,8 +57,13 @@ primer that leads into the full SAT binder later in junior year.
 ### Lesson 3
 - **3A — Reading & Grammar:** Find the Subject · Cross off Prepositional Phrases ·
   Verb Agreement · Pronoun Agreement · Match the Modifier
-- **3B — Geometry (explicit):** Lines & Angles · Triangles · Circles · Volume ·
-  Trigonometry — explicit formulas + labeled diagrams
+- **3B — Geometry (explicit, redesigned to 5 lessons, tightly tied to the
+  Reference Sheet — full formula-sheet walkthrough happens here):**
+  1. Triangles
+  2. Area
+  3. Volume
+  4. Degrees & Radians
+  5. Circles
 
 ### Lesson 4
 - **4A — Reading & Grammar:** Reading for Speed & Meaning · Transitions ·
@@ -89,6 +100,11 @@ primer that leads into the full SAT binder later in junior year.
 Front checklist becomes **Test 8 + Test 9** (8 modules total).
 
 ---
+
+## Confirmed in-lesson problem placements (from PSAT Test 2)
+- **1B Plug In & Solve:** T2 M1 Q7 · **1B Table Function:** T2 M2 Q10
+- **2B Systems of Equations:** T2 M1 Q15 · **2B Feed the Function:** T2 M2 Q12
+- Problems inserted as **cropped images** from the test PDF (exact notation).
 
 ## Source materials
 - `2026 SAT Prep Roots Book.pdf` — original to convert (in repo)
