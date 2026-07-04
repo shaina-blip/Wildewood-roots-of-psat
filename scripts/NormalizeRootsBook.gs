@@ -1,148 +1,133 @@
 /************************************************************************
- * Wildewood PSAT "Roots" Book — Formatting Normalizer
+ * Wildewood PSAT "Roots" Book — Formatting Normalizer  (v2)
  * ---------------------------------------------------------------------
- * Fixes the #1 annoyance: inserted paragraphs that don't match your body
- * text. It learns your "house style" from your real Gelasio paragraphs
- * (font, size, line spacing, space-after, indentation) and applies it to
- * any paragraph that is still in the wrong font — so everything lines up.
+ * Fixes three things so you can focus on CONTENT, not formatting:
  *
- * It LEAVES ALONE: your headers, tables' header rows, the Caveat
- * handwriting tagline, and anything already in the body font.
+ *  1) SIZES:  body text -> 12 pt,  bold sub-headings -> 14 pt.
+ *  2) INDENTS: clears stray left / first-line indents on body text.
+ *  3) "INVISIBLE TABLE" FEEL: unwraps the single-cell tables that box
+ *     reading passages, turning them into normal paragraphs you can edit
+ *     freely. (Keeps real tables — headers, the intelligences inventory,
+ *     homework grids, the reference sheet, and small write-in boxes.)
  *
- * Safe + re-runnable: run it whenever you finish editing CONTENT and it
- * cleans up the formatting. (It won't re-touch paragraphs already fixed.)
+ * Fonts: retypes wrong/default fonts to Gelasio but LEAVES the Caveat
+ * handwriting tagline and your headers alone.
  *
- * HOW TO RUN  (test on a COPY first!)
+ * HOW TO RUN  (always test on a COPY first!)
  *   1. File ▸ Make a copy
- *   2. Extensions ▸ Apps Script
- *   3. Delete the sample code, paste THIS file, Save.
- *   4. Choose  normalizeFormatting  in the toolbar ▸ Run ▸ authorize.
+ *   2. Extensions ▸ Apps Script  ▸ paste this whole file ▸ Save
+ *   3. Run  normalizeFormatting  ▸ authorize.
  *   Tip: set DRY_RUN = true to preview counts in View ▸ Logs first.
  ************************************************************************/
 
 var CONFIG = {
   DRY_RUN: false,
 
-  // Your body style. Leave BODY_SIZE/spacing as 'auto' to copy them from
-  // your own Gelasio text; or hard-set numbers (e.g. BODY_SIZE: 11).
-  BODY_FONT:   'Gelasio',
-  BODY_SIZE:   'auto',   // pt, or 'auto'
-  LINE_SPACING:'auto',   // e.g. 1.15, or 'auto'
-  SPACE_AFTER: 'auto',   // pt, or 'auto'
-  SPACE_BEFORE:'auto',   // pt, or 'auto'
+  BODY_FONT: 'Gelasio',
+  BODY_SIZE: 12,          // normal body text  (set 11 if you prefer)
+  SUBHEAD_SIZE: 14,       // bold sub-headings
+  SUBHEAD_MAX_CHARS: 60,  // a bold line this short (or shorter) = sub-heading
 
-  FIX_INDENTATION: true, // reset stray left/first-line indents on fixed paras
-  FIX_TABLE_FONTS: true, // also retype wrong-font text inside tables
+  FIX_INDENTATION: true,
+  UNWRAP_PASSAGE_TABLES: true,
+  UNWRAP_MIN_CHARS: 150,  // only unwrap single-cell tables holding real text
+                          // (so blank write-in boxes are left as boxes)
 
-  // Fonts that count as "wrong" (i.e., my inserted defaults). A run in any
-  // of these — or with no font set — gets retyped to BODY_FONT.
+  // Fonts treated as "wrong" (my inserted defaults). Retyped to BODY_FONT.
+  // Gelasio is also re-sized here so the all-14 mistake gets corrected.
   WRONG_FONTS: ['Arial', 'Calibri', 'Docs-Calibri', 'Times New Roman'],
+  // Fonts to leave completely alone (never retype/resize):
+  PRESERVE_FONTS: ['Caveat'],
 };
 
 
 function normalizeFormatting() {
   var doc  = DocumentApp.getActiveDocument();
   var body = doc.getBody();
-  var style = detectHouseStyle_(body);
-  Logger.log('House style: font=%s size=%s line=%s after=%s before=%s',
-    style.font, style.size, style.line, style.after, style.before);
+  var rep = { unwrapped: 0, paras: 0 };
 
-  var rep = { paras: 0, runs: 0 };
+  if (CONFIG.UNWRAP_PASSAGE_TABLES) unwrapPassageTables_(body, rep);
+
   var paras = body.getParagraphs();
-  for (var i = 0; i < paras.length; i++) fixParagraph_(paras[i], style, rep, false);
+  for (var i = 0; i < paras.length; i++) normalizePara_(paras[i], rep);
 
-  if (CONFIG.FIX_TABLE_FONTS) {
-    var tables = body.getTables();
-    for (var t = 0; t < tables.length; t++) fixTable_(tables[t], style, rep);
-  }
-
-  Logger.log('Paragraphs restyled: %s   Runs retyped: %s%s',
-    rep.paras, rep.runs, CONFIG.DRY_RUN ? '   (DRY RUN)' : '');
+  Logger.log('Passage tables unwrapped: %s   Paragraphs normalized: %s%s',
+    rep.unwrapped, rep.paras, CONFIG.DRY_RUN ? '   (DRY RUN)' : '');
   try {
-    DocumentApp.getUi().alert('Formatting normalized.\nParagraphs restyled: ' +
-      rep.paras + '\nRuns retyped: ' + rep.runs + (CONFIG.DRY_RUN ? '\n(DRY RUN — nothing saved)' : ''));
+    DocumentApp.getUi().alert('Formatting normalized.\n' +
+      'Passage tables unwrapped: ' + rep.unwrapped +
+      '\nParagraphs normalized: ' + rep.paras +
+      (CONFIG.DRY_RUN ? '\n(DRY RUN — nothing changed)' : ''));
   } catch (e) {}
 }
 
 
-/** Learn font size + spacing from the first solid Gelasio body paragraph. */
-function detectHouseStyle_(body) {
-  var s = { font: CONFIG.BODY_FONT, size: 11, line: 1.15, after: 0, before: 0 };
-  var paras = body.getParagraphs();
-  for (var i = 0; i < paras.length; i++) {
-    var p = paras[i];
-    if (p.getHeading() !== DocumentApp.ParagraphHeading.NORMAL) continue;
-    var txt = p.getText();
-    if (!txt || txt.trim().length < 8) continue;
-    if (p.editAsText().getFontFamily(0) === CONFIG.BODY_FONT) {
-      s.size   = p.editAsText().getFontSize(0) || s.size;
-      s.line   = p.getLineSpacing() || s.line;
-      s.after  = (p.getSpacingAfter()  != null) ? p.getSpacingAfter()  : s.after;
-      s.before = (p.getSpacingBefore() != null) ? p.getSpacingBefore() : s.before;
-      break;
-    }
-  }
-  if (CONFIG.BODY_SIZE   !== 'auto') s.size   = CONFIG.BODY_SIZE;
-  if (CONFIG.LINE_SPACING!== 'auto') s.line   = CONFIG.LINE_SPACING;
-  if (CONFIG.SPACE_AFTER !== 'auto') s.after  = CONFIG.SPACE_AFTER;
-  if (CONFIG.SPACE_BEFORE!== 'auto') s.before = CONFIG.SPACE_BEFORE;
-  return s;
-}
+/** Turn single-cell tables that hold real text into normal paragraphs. */
+function unwrapPassageTables_(body, rep) {
+  var tables = body.getTables();
+  for (var i = tables.length - 1; i >= 0; i--) {
+    var tbl = tables[i];
+    if (tbl.getNumRows() !== 1) continue;
+    if (tbl.getRow(0).getNumCells() !== 1) continue;
+    var cell = tbl.getCell(0, 0);
+    if (cell.getText().replace(/\s/g, '').length < CONFIG.UNWRAP_MIN_CHARS) continue;
 
-
-function isWrongFont_(f) {
-  return f == null || f === '' || CONFIG.WRONG_FONTS.indexOf(f) !== -1;
-}
-
-
-/** Retype wrong-font runs in a paragraph; if any were wrong, also align its
- *  spacing/indent to the house style. Skips headings. */
-function fixParagraph_(p, style, rep, inTable) {
-  if (p.getHeading && p.getHeading() !== DocumentApp.ParagraphHeading.NORMAL) return;
-  var t = p.editAsText ? p.editAsText() : null;
-  if (!t) return;
-  var s = t.getText();
-  if (!s || !s.length) return;
-
-  var touched = false;
-  for (var i = 0; i < s.length; i++) {
-    if (isWrongFont_(t.getFontFamily(i))) {
-      var j = i;
-      while (j + 1 < s.length && isWrongFont_(t.getFontFamily(j + 1))) j++;
-      if (!CONFIG.DRY_RUN) {
-        t.setFontFamily(i, j, style.font);
-        t.setFontSize(i, j, style.size);
-      }
-      rep.runs++; touched = true;
-      i = j;
-    }
-  }
-
-  if (touched && !inTable) {  // only reflow spacing/indent for real body paras
-    rep.paras++;
     if (!CONFIG.DRY_RUN) {
-      p.setLineSpacing(style.line);
-      p.setSpacingAfter(style.after);
-      p.setSpacingBefore(style.before);
-      if (CONFIG.FIX_INDENTATION) {
-        p.setIndentStart(0); p.setIndentFirstLine(0); p.setIndentEnd(0);
-      }
-    }
-  }
-}
-
-
-function fixTable_(tbl, style, rep) {
-  for (var r = 0; r < tbl.getNumRows(); r++) {
-    var row = tbl.getRow(r);
-    for (var c = 0; c < row.getNumCells(); c++) {
-      var cell = row.getCell(c);
+      var at = body.getChildIndex(tbl);
       for (var k = 0; k < cell.getNumChildren(); k++) {
         var child = cell.getChild(k);
-        if (child.getType() === DocumentApp.ElementType.PARAGRAPH) {
-          fixParagraph_(child.asParagraph(), style, rep, true);  // font only in tables
+        var type = child.getType();
+        if (type === DocumentApp.ElementType.PARAGRAPH) {
+          body.insertParagraph(at++, child.copy());
+        } else if (type === DocumentApp.ElementType.LIST_ITEM) {
+          body.insertListItem(at++, child.copy());
+        } else if (type === DocumentApp.ElementType.TABLE) {
+          body.insertTable(at++, child.copy());
         }
       }
+      body.removeChild(tbl);
+    }
+    rep.unwrapped++;
+  }
+}
+
+
+function firstFont_(t, len) {
+  for (var i = 0; i < len; i++) {
+    var f = t.getFontFamily(i);
+    if (f != null) return f;
+  }
+  return null;
+}
+
+
+/** Set font + size (body vs sub-heading) + indent on a body paragraph.
+ *  Skips headings and anything in a PRESERVE font (e.g., Caveat). */
+function normalizePara_(p, rep) {
+  if (p.getHeading && p.getHeading() !== DocumentApp.ParagraphHeading.NORMAL) return;
+  var t = p.editAsText();
+  var s = t.getText();
+  if (!s || !s.trim().length) return;
+
+  var f = firstFont_(t, s.length);
+  if (CONFIG.PRESERVE_FONTS.indexOf(f) !== -1) return;         // leave handwriting etc.
+  var processable = (f === CONFIG.BODY_FONT) || (f == null) ||
+                    (CONFIG.WRONG_FONTS.indexOf(f) !== -1);
+  if (!processable) return;                                    // leave unknown intentional fonts
+
+  // sub-heading? bold + short line
+  var firstBoldIdx = 0;
+  while (firstBoldIdx < s.length && s[firstBoldIdx] === ' ') firstBoldIdx++;
+  var isBold = t.isBold(firstBoldIdx);
+  var isSubhead = isBold && s.trim().length <= CONFIG.SUBHEAD_MAX_CHARS;
+  var size = isSubhead ? CONFIG.SUBHEAD_SIZE : CONFIG.BODY_SIZE;
+
+  if (!CONFIG.DRY_RUN) {
+    t.setFontFamily(CONFIG.BODY_FONT);
+    t.setFontSize(size);
+    if (CONFIG.FIX_INDENTATION) {
+      p.setIndentStart(0); p.setIndentFirstLine(0); p.setIndentEnd(0);
     }
   }
+  rep.paras++;
 }
