@@ -66,22 +66,40 @@ primer that leads into the full SAT binder later in junior year.
   5. Circles
 
 ### Lesson 4
-- **4A — Reading & Grammar:** Reading for Speed & Meaning · Transitions ·
-  Double Texts · Apostrophes · Texts About Studies
-- **4B — Math:** Percents · Ratios/Unit Conversion · Averages ·
-  Exponential Growth · Probability
+- **4A — Reading & Grammar (explicit-first):**
+  1. Reading for Speed & Meaning (active-listening tie-in; first/last sentence; summaries)
+  2. Transitions (explicit taxonomy: continue/contrast/cause/example)
+  3. Double Texts — THE skill: does Text 2 agree, disagree, or land in the middle?
+  4. Apostrophes — explicit owner-singular/plural rules; its/it's, their/there/they're
+  5. Texts About Studies (hypothesis/findings/limits vocabulary)
+- **4B — Math:** Percents (+ do-it-in-Desmos) · Ratios & Unit Conversion ·
+  **Exponents & Equivalent Expressions** (replaces Averages — mean/median already
+  in 1B Statistics) · Exponential Growth · Probability
 
 ### Lesson 5
-- **5A — Reading & Grammar:** Ground Yourself in the Claim · Logical Text
-  Completions · Tables & Graphs · Review All Punctuation
-- **5B — Math + Quadratics:** **Quadratics — full treatment** (standard vs.
-  vertex vs. factored; roots/vertex/intercept; solving in Desmos) · Rates ·
-  Like Denominators · Consecutive Integers · TFT Individual Practice
+- **5A — Reading & Grammar:**
+  1. **The Right Answer Always Has Evidence** (reframed from "Ground Yourself
+     in the Claim")
+  2. Logical Text Completions
+  3. Tables & Graphs
+  4. Review All Punctuation (cumulative red/yellow-light + answer-hierarchy drill)
+- **5B — Math:** **Quadratics — full treatment** (standard vs. vertex vs.
+  factored; roots/vertex/intercept; solving in Desmos) ·
+  **Scatterplots & Line of Best Fit** · **Interpreting Equations in Context** ·
+  TFT Individual Practice
+  *(Rates, Like Denominators, Consecutive Integers cut)*
 
 ### Lessons 6–8 (test cycle)
 - **6:** Take a full **PSAT practice test in Bluebook** (official digital)
-- **7:** Review the practice test (part 1)
+- **7:** Review the practice test — **TFT review across 3 pages: Reading /
+  Writing / Math**
 - **8:** Review the practice test (part 2) + Final Reminders
+
+### Other locked decisions
+- 2B TFT intro stays compact; its examples swap to PSAT problems.
+- Double Texts skill = does Text 2 agree / disagree / land in the middle?
+- Percents lesson highlights doing the arithmetic in Desmos.
+- Answers → comments batch pass at the very end, after content locks.
 
 ---
 
