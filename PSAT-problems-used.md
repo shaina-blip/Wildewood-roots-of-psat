@@ -170,3 +170,62 @@ practice, grammar/percent/exponential/probability "your turn" items).
 | 10 | g(x) = 11 + 4x table | 1B Table Function | A |
 | 11 | scuba pressure | 5B Interpreting Equations | A (60.90) |
 | 12 | f(x) = 4x⁻¹, f(21) | 2B Feed the Function | C (4/21) |
+
+
+---
+
+# "More practice" additions (second pass)
+
+## Test 1 additions (23)
+
+**R&W Module 1**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 14 | One Night in Miami quotation | 5A Evidence | D |
+| 23 | polyphenols "that, among their many roles," | 2A Commas | C |
+| 30 | monopsony transition | 4A Transitions | C (Similarly) |
+
+**R&W Module 2**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 9 | Sharif/Maddux free time (double text) | 4A Double Texts | C |
+| 11 | dog breeds study (main idea) | 4A Texts About Studies | B |
+
+**Math Module 1**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 8 | slope 3 through (0, −8) | 2B Linear | B |
+| 10 | h(x) = 3x − 7, h(−2) | 2B Feed the Function | A (−13) |
+| 12 | scatterplot slope of best fit | 5B Scatterplots | C (0.44) |
+| 14 | f(x) = a + bx, weight at birth | 2B Linear (indep/dep) | 241 |
+| 19 | x + 2y = 6; x − 2y = 4 | 2B Systems | B (5) |
+| 22 | 5x² − 37x − 24 = 0 (positive sol.) | 1B Plug In & Solve | C (8) |
+| 23 | parallel lines, y < 65 | 3B Degrees & Radians | B |
+| 25 | softball vertex form | 5B Quadratics | D |
+| 27 | (x + 7)² + 4 minimum | 5B Quadratics | −7 |
+
+**Math Module 2**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 3 | gift card rentals | 4B Match the Measurements | B (25) |
+| 7 | parallel slope of y = ¼x + 1 | 2B Parallel/Perpendicular | 1/4 |
+| 8 | same-median data set | 1B Statistics | B |
+| 9 | base = 89% of height | 4B Percents | D (0.89h) |
+| 11 | y = −4x + 40 table | 1B Table Function | C |
+| 16 | factor of 2x² + 38x + 10 | 4B Exponents & Equiv. | A (2) |
+| 18 | stock price (1, 83) | 5B Interpreting Equations | C |
+| 19 | f(x) = 39 table | 1B Table Function | B |
+| 22 | infinitely many solutions | 2B Systems | C |
+
+## Test 2 additions (6)
+
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| R&W M1 Q21 | jugglers "their" | 4A Apostrophes | D |
+| R&W M1 Q23 | solarpunk "powers" | 3A Subject–Verb Agreement | C |
+| R&W M1 Q24 | Butterfly "spectrum:" | 2A Dashes & Colons | B |
+| Math M1 Q14 | marmot mean | 1B Statistics | 3,630 |
+| Math M1 Q20 | scatter: points below line | 5B Scatterplots | 6 |
+| Math M2 Q2 | snow probability graph | 4B Probability | C (Thursday) |
+
+**GRAND TOTALS: 72 official PSAT problems (Test 1: 43 · Test 2: 29).**
