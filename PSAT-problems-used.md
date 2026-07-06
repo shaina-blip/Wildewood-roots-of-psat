@@ -84,6 +84,89 @@ Every problem pulled from **PSAT/NMSQT Practice Tests 1 & 2**, by lesson.
 | Interpreting Equations | P(8) ≈ 32.91 | T2 · Math M1 · Q12 | C |
 | Interpreting Equations | scuba pressure | T2 · Math M2 · Q11 | A (60.90) |
 
-**Totals: 35 official PSAT problems** (T1: 15 · T2: 20), plus custom-written
-items (median drills, write-the-equation set, box-and-whisker practice,
-grammar/percent/exponential/probability "your turn" items).
+**Totals: 43 official PSAT problems** (Test 1: 20 · Test 2: 23), plus
+custom-written items (median drills, write-the-equation set, box-and-whisker
+practice, grammar/percent/exponential/probability "your turn" items).
+
+---
+
+# Same problems, in test order
+
+## Test 1 (20 problems)
+
+**Reading & Writing, Module 1**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 1 | Amy Lowell "a void" | 5A Completions | B |
+| 3 | Kouchaki workload study | 4A Texts About Studies | B |
+| 4 | Dracula "disturbed" | 5A Completions | B |
+| 6 | Anne of Green Gables (main purpose) | 4A Reading | D |
+| 12 | e-book sales table | 5A Tables & Graphs | A |
+| 24 | Kekuku "musicians introduced audiences" | 4A Apostrophes | A |
+
+**Reading & Writing, Module 2**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 20 | tardigrades "they" | 3A Pronouns | C |
+| 22 | Erie Canal (intro comma) | 2A Dashes & Colons | C |
+| 23 | Poe "writers" (no punctuation) | 2A Periods & Semicolons | A |
+| 24 | Coltrane "sweeps" | 3A Subject–Verb Agreement | D |
+| 25 | butterfly "its wings" | 4A Apostrophes | A |
+| 27 | Tranströmer (nonessential comma) | 2A Commas | D |
+
+**Math, Module 1**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 9 | triangle perimeter = 22 | 3B Triangles | A (6) |
+| 18 | rectangle y = (15w)(w) | 3B Area | A |
+
+**Math, Module 2**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 1 | box plot median | 1B Statistics (standalone) | C (5) |
+| 4 | x = 49; y = √x + 9 | 5B Quadratics | A (16) |
+| 5 | cherry-pitting machine | 4B Match the Measurements | C (24) |
+| 13 | triangle JKL angle sum | 3B Triangles | 84 |
+| 20 | triangular prism base area | 3B Area | 27 |
+| 24 | similar quadrilaterals | 3B Degrees & Radians | B (30°) |
+
+## Test 2 (23 problems)
+
+**Reading & Writing, Module 1**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 13 | Happy House quotation | 5A Evidence | A |
+| 20 | Bass "became" | 3A Verb form | B |
+| 22 | horsepower (semicolon) | 2A Periods & Semicolons | C |
+| 26 | GPS transition | 4A Transitions | A |
+
+**Reading & Writing, Module 2**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 9 | mycoprotein (double text) | 4A Double Texts | B |
+
+**Math, Module 1**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 4 | contract c = 23t + 35 | 2B Linear (indep/dep) | C |
+| 7 | 8x − 7x + 130 = 260 | 1B Plug In & Solve | 130 |
+| 9 | gemstone frequency table | 4B Probability | A (3/157) |
+| 11 | equilateral triangle | 3B Triangles | A |
+| 12 | P(8) ≈ 32.91 interpretation | 5B Interpreting Equations | C |
+| 13 | cylinder height | 3B Volume | 29 |
+| 15 | x = 3; y = (15 − x)² | 2B Systems | A (432) |
+| 17 | circle area, r = 43 | 3B Circles | D (1,849π) |
+| 18 | density 168 ÷ 24 | 2B TFT Practice | A (7) |
+| 19 | newsletter 7%/month | 4B Exponential Growth | B |
+| 23 | 0.35x percent decrease | 4B Percents | D (65%) |
+
+**Math, Module 2**
+| Q | Problem | Used in | Answer |
+|---|---|---|---|
+| 4 | intersecting lines, w = 136 | 3B Degrees & Radians | B (44) |
+| 5 | 19(x² − 7) equivalent | 4B Exponents & Equiv. Expr. | A |
+| 6 | parabola y-intercept | 5B Quadratics | 8 |
+| 8 | scatterplot linear model | 5B Scatterplots | D |
+| 10 | g(x) = 11 + 4x table | 1B Table Function | A |
+| 11 | scuba pressure | 5B Interpreting Equations | A (60.90) |
+| 12 | f(x) = 4x⁻¹, f(21) | 2B Feed the Function | C (4/21) |
