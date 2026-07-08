@@ -42,7 +42,7 @@
  *   5. Run NormalizeRootsBook afterward to lock the fonts/spacing.
  ************************************************************************/
 
-var CONFIG = {
+var EDIT_CONFIG = {
   DRY_RUN: true,
   BODY_FONT: 'Gelasio',
   BODY_SIZE: 11,
@@ -217,7 +217,7 @@ function applyContentEdits() {
   RETITLES.forEach(function(r){
     var tbl = findHeader_(headers, r.label);
     if (!tbl) { log.push('SKIP retitle (header not found): ' + r.label); return; }
-    if (!CONFIG.DRY_RUN) {
+    if (!EDIT_CONFIG.DRY_RUN) {
       if (r.timeFind) tbl.replaceText(escapeRe_(r.timeFind), r.timeTo);
       tbl.replaceText(escapeRe_(r.find), r.to);
     }
@@ -232,7 +232,7 @@ function applyContentEdits() {
     var removed = replaceSection_(body, tbl, headers, sec.content);
     log.push('rewrite ' + sec.label + ' [' + sec.note + ']:  removed ' + removed
              + ' old block(s), inserted ' + sec.content.length + ' line(s)'
-             + (CONFIG.PRESERVE_IMAGES ? ' (images kept)' : ''));
+             + (EDIT_CONFIG.PRESERVE_IMAGES ? ' (images kept)' : ''));
   });
 
   // 3) append examples
@@ -243,9 +243,9 @@ function applyContentEdits() {
     log.push('append ' + sec.label + ' [' + sec.note + ']:  added ' + sec.content.length + ' line(s)');
   });
 
-  var msg = log.join('\n') + (CONFIG.DRY_RUN ? '\n\n(DRY RUN — nothing changed)' : '');
+  var msg = log.join('\n') + (EDIT_CONFIG.DRY_RUN ? '\n\n(DRY RUN — nothing changed)' : '');
   Logger.log(msg);
-  try { DocumentApp.getUi().alert('Content edits ' + (CONFIG.DRY_RUN ? '(DRY RUN)' : 'applied') + ':\n\n' + msg); } catch (e) {}
+  try { DocumentApp.getUi().alert('Content edits ' + (EDIT_CONFIG.DRY_RUN ? '(DRY RUN)' : 'applied') + ':\n\n' + msg); } catch (e) {}
 }
 
 
@@ -289,10 +289,10 @@ function replaceSection_(body, tbl, headers, content) {
   var end = nextHeaderIndex_(body, tbl, headers);
   var removed = 0;
 
-  if (!CONFIG.DRY_RUN) {
+  if (!EDIT_CONFIG.DRY_RUN) {
     for (var k = end - 1; k > start; k--) {
       var ch = body.getChild(k);
-      if (CONFIG.PRESERVE_IMAGES && containsImage_(ch)) continue;
+      if (EDIT_CONFIG.PRESERVE_IMAGES && containsImage_(ch)) continue;
       if (ch.getType() === DocumentApp.ElementType.TABLE && isLessonHeader_(ch.asTable())) continue;
       body.removeChild(ch);
       removed++;
@@ -301,7 +301,7 @@ function replaceSection_(body, tbl, headers, content) {
   } else {
     for (var j = end - 1; j > start; j--) {
       var c = body.getChild(j);
-      if (!(CONFIG.PRESERVE_IMAGES && containsImage_(c)) &&
+      if (!(EDIT_CONFIG.PRESERVE_IMAGES && containsImage_(c)) &&
           !(c.getType() === DocumentApp.ElementType.TABLE && isLessonHeader_(c.asTable()))) removed++;
     }
   }
@@ -310,7 +310,7 @@ function replaceSection_(body, tbl, headers, content) {
 
 /** Insert content at the very end of a section (right before the next header). */
 function appendToSection_(body, tbl, headers, content) {
-  if (CONFIG.DRY_RUN) return;
+  if (EDIT_CONFIG.DRY_RUN) return;
   var at = nextHeaderIndex_(body, tbl, headers);
   insertContent_(body, at, content);
 }
@@ -326,8 +326,8 @@ function insertContent_(body, at, content) {
 function styleInserted_(para, kind) {
   para.setHeading(DocumentApp.ParagraphHeading.NORMAL);
   var t = para.editAsText();
-  t.setFontFamily(CONFIG.BODY_FONT);
-  t.setFontSize(kind === 'h' ? CONFIG.SUBHEAD_SIZE : CONFIG.BODY_SIZE);
+  t.setFontFamily(EDIT_CONFIG.BODY_FONT);
+  t.setFontSize(kind === 'h' ? EDIT_CONFIG.SUBHEAD_SIZE : EDIT_CONFIG.BODY_SIZE);
   t.setBold(kind === 'h');
   t.setItalic(kind === 'i');
   para.setLineSpacing(1.0);
