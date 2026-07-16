@@ -1,17 +1,17 @@
 /************************************************************************
- * Wildewood PSAT "Roots" Book — Formatting Normalizer  (v3)
+ * Wildewood PSAT "Roots" Book — Formatting Normalizer  (v4)
  * ---------------------------------------------------------------------
- * Makes the Google Doc match the printed "house look":
+ * Calibrated to the printed SAT Roots book's measured house style:
  *
  *   • FONT: everything → Gelasio (except the Caveat handwriting tagline)
- *   • SIZE: body 11 pt · bold sub-headings 13 pt
+ *   • SIZE: body 12 pt · bold sub-headings STAY 12 pt (bold, not bigger —
+ *     matches the SAT book, where run-in bold labels are the same size)
  *   • SPACING: single line spacing, small gap after each paragraph
  *   • BULLETS: clean hanging indents (nested bullets step in further)
  *   • LESSON HEADER TABLES ("Lesson 4B, Part 1 of 5 | 10 minutes"):
- *       – label cell: blue, bold-italic-underline, 15 pt (fixes the
- *         broken "of 5" run styling)
- *       – time cell: bold-italic 15 pt, right-aligned
- *       – title row: bold, underlined, CENTERED, 14 pt
+ *       – label cell: blue #1155cc, bold-italic, 20 pt (NOT underlined)
+ *       – time cell: bold-italic 20 pt, black, right-aligned
+ *       – title row: bold 20 pt, black, left-aligned (NOT underlined)
  *   • MARGINS: page margins set to the book's print margins
  *   • Also unwraps single-cell passage boxes (safe to re-run)
  *
@@ -26,13 +26,13 @@ var CONFIG = {
   DRY_RUN: false,
 
   BODY_FONT: 'Gelasio',
-  BODY_SIZE: 11,
-  SUBHEAD_SIZE: 13,        // short bold lines ("The Facts", "Pro Tip"…)
+  BODY_SIZE: 12,           // SAT book body = Gelasio-Regular 12
+  SUBHEAD_SIZE: 12,        // SAT book keeps bold subheads at 12 (bold, not bigger)
   SUBHEAD_MAX_CHARS: 60,
 
-  HDR_LABEL_SIZE: 15,      // "Lesson 4B, Part 1 of 5"
-  HDR_TIME_SIZE: 15,       // "10 minutes"
-  HDR_TITLE_SIZE: 14,      // "Percents"
+  HDR_LABEL_SIZE: 20,      // "Lesson 4B, Part 1 of 5"  (BoldItalic 20, blue)
+  HDR_TIME_SIZE: 20,       // "10 minutes"              (BoldItalic 20, black)
+  HDR_TITLE_SIZE: 20,      // "Percents"                (Bold 20, black)
   HDR_BLUE: '#1155cc',
 
   LINE_SPACING: 1.0,
@@ -120,17 +120,18 @@ function styleLessonHeader_(tbl) {
   var row0 = tbl.getRow(0);
   // label cell — uniform blue bold italic underline (fixes broken runs)
   var label = row0.getCell(0);
-  styleCellText_(label, CONFIG.HDR_LABEL_SIZE, true, true, true, CONFIG.HDR_BLUE,
+  // label: bold-italic, blue, NOT underlined (matches SAT book)
+  styleCellText_(label, CONFIG.HDR_LABEL_SIZE, true, true, false, CONFIG.HDR_BLUE,
                  DocumentApp.HorizontalAlignment.LEFT);
-  // time cell (if present)
+  // time cell (if present): bold-italic, black, right-aligned
   if (row0.getNumCells() > 1) {
     styleCellText_(row0.getCell(1), CONFIG.HDR_TIME_SIZE, true, true, false, null,
                    DocumentApp.HorizontalAlignment.RIGHT);
   }
-  // title row (second row, one cell): centered, bold, underline
+  // title row (second row, one cell): bold, black, left-aligned, NOT underlined
   if (tbl.getNumRows() > 1) {
-    styleCellText_(tbl.getRow(1).getCell(0), CONFIG.HDR_TITLE_SIZE, true, false, true,
-                   null, DocumentApp.HorizontalAlignment.CENTER);
+    styleCellText_(tbl.getRow(1).getCell(0), CONFIG.HDR_TITLE_SIZE, true, false, false,
+                   null, DocumentApp.HorizontalAlignment.LEFT);
   }
 }
 
